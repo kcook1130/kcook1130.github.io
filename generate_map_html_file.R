@@ -1,6 +1,7 @@
 list.of.packages <- c("leaflet", "htmlwidgets")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
+copyDependencyToDir(dependency, outputDir, mustWork = TRUE)
 
 
 # Start Script Here: ------------------------------------------------------
@@ -20,7 +21,6 @@ map = leaflet() %>%
     addTiles( ) %>%
   addProviderTiles(providers$Stamen.Toner) %>%
     addMarkers(data = df, lat = df$Latitude, lng = df$Longitude, popup = popup )
-
 map
 
 htmlwidgets::saveWidget(map, file = paste0(dirname(my.path), "/map.html"))
